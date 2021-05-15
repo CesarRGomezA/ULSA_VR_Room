@@ -52,10 +52,11 @@ MonoBehaviour:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 4328635782936163607}
     RegisteredScenes:
-    - ClickSample
+    - Game
+    - Menu
     AllowRuntimeSceneChanges: 0
     NetworkPrefabs:
-    - Prefab: {fileID: 5919615798040949962, guid: 41dd2a223f630db4cb01f23251f9568a,
+    - Prefab: {fileID: 5919615798040949962, guid: 1069949d839e6994f91e1cc6eb551057,
         type: 3}
       PlayerPrefab: 1
     PlayerPrefabHash:
@@ -87,7 +88,7 @@ MonoBehaviour:
     00000000:
       type: {class: NullableBoolSerializable, ns: MLAPI.Configuration, asm: Unity.Multiplayer.MLAPI.Runtime}
       data:
-        Value: 9865550614383234318
+        Value: 1394309249395281281
 --- !u!114 &4328635782936163607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,4 +126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f07cea9d7135a764c972a8bd8401a45f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTrsPoint: {fileID: 0}
+  startPlayer1: {x: 30, y: 0, z: -35}
+  startPlayer2: {x: 35, y: 0, z: -35}
+  hostPlayer: 0
+  initNetwork:
+    m_PersistentCalls:
+      m_Calls: []

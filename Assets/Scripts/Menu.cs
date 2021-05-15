@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using MLAPI;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
     [SerializeField]
-    Button startHostBtn;
+    TargetButton startHost;
     [SerializeField]
-    Button startClientBtn;
+    TargetButton startClient;
 
     void Awake() 
     {
-        startHostBtn.onClick.AddListener(() => {
+        startHost.action.AddListener(() => {
             NetworkManager.Singleton.StartHost();
-            gameObject.SetActive(false);
         });
 
-        startClientBtn.onClick.AddListener(() => {
+        startClient.action.AddListener(() => {
             NetworkManager.Singleton.StartClient();
-            gameObject.SetActive(false);
         });
     }
 }

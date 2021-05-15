@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2058b560a24e1fc4d8f5c99fbef58176, type: 3}
-  m_Name: Dialog Item
+  m_Name: Question1
   m_EditorClassIdentifier: 
-  message: 'mensaje
-
-'
+  message: "\xBFEn qu\xE9 a\xF1o naci\xF3 Juan Gabriel?"
+  correctOption: 1950
+  incorrectOption: 1976

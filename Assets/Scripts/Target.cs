@@ -7,7 +7,7 @@ public class Target : MonoBehaviour
   [SerializeField]
   Color catchColor = Color.cyan;
   [SerializeField]
-  DialogItem dialog;
+  Question dialog;
 
   Renderer render;
   [SerializeField]
@@ -33,18 +33,12 @@ public class Target : MonoBehaviour
       textInteraction.gameObject.SetActive(true);
     }
 
-    if(dialogsItems[index] as AlertDialogueItem)
+    if(dialogsItems[index] as Question)
     {
-      AlertDialogueItem item = dialogsItems[index] as AlertDialogueItem;
+      Question item = dialogsItems[index] as Question;
       textInteraction.Message = item.Message;
-      textInteraction.FontColor =  item.AlertColor;
     }
-    else
-    {
-      DialogItem item = dialogsItems[index] as DialogItem;
-      textInteraction.Message = item.Message;
-      textInteraction.FontColor = Color.white;
-    }
+
 
     //textInteraction.Message = dialogsItems[index].Message;
     //Debug.Log(dialogsItems[index].);
