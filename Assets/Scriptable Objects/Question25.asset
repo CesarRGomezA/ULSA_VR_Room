@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2058b560a24e1fc4d8f5c99fbef58176, type: 3}
   m_Name: Question25
   m_EditorClassIdentifier: 
-  message: 
-  correctOption: 
-  incorrectOption: 
+  message: "\xBFQui\xE9n secuestra a Elizabeth en la pel\xEDcula \u201CPiratas del
+    Carible: la maldici\xF3n de la Perla Negra?"
+  correctOption: Hector Barbossa
+  incorrectOption: James Norrington

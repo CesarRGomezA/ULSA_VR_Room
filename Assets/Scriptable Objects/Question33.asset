@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2058b560a24e1fc4d8f5c99fbef58176, type: 3}
   m_Name: Question33
   m_EditorClassIdentifier: 
-  message: 
-  correctOption: 
-  incorrectOption: 
+  message: "\xBFQui\xE9n acompa\xF1a a Sonic en su aventura en el video juego \u201CSonic
+    Unleashed?"
+  correctOption: Chip
+  incorrectOption: Tails
