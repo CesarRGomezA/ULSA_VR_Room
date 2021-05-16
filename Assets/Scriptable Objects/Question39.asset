@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2058b560a24e1fc4d8f5c99fbef58176, type: 3}
   m_Name: Question39
   m_EditorClassIdentifier: 
-  message: 
-  correctOption: 
-  incorrectOption: 
+  message: "\xBFCu\xE1ntas espadas usa el protagonista en el videojuego \u201CTales
+    of Symphonia\u201D?"
+  correctOption: 2
+  incorrectOption: 1

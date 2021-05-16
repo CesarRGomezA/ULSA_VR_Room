@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2058b560a24e1fc4d8f5c99fbef58176, type: 3}
   m_Name: Question14
   m_EditorClassIdentifier: 
-  message: 
-  correctOption: 
-  incorrectOption: 
+  message: "\xBFQu\xE9 fil\xF3sofo escribi\xF3 la \u201CAlegor\xEDa de la caverna\u201D?"
+  correctOption: "Plat\xF3n"
+  incorrectOption: "S\xF3crates"
