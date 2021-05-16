@@ -25,6 +25,8 @@ public class VRCamera : NetworkBehaviour
   TargetButton target;
   Camera m_camera;
 
+  public int player;
+
   void Awake()
   {
     m_camera = GetComponent<Camera>();
@@ -55,13 +57,12 @@ public class VRCamera : NetworkBehaviour
     }
 
     if(IsServer)
-    {
-      transform.position = GameManager.instance.startPointPlayer1;
-    }
+      player = 1;
     else
-    {
-      transform.position = GameManager.instance.startPointPlayer2;
-    }
+      player = 2;
+    
+    GameManager.instance.GetPlayerPosition(this);
+    GameManager.instance.MoveToNextStep(this);
   }
 
   void ClickOverObject()

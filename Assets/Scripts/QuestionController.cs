@@ -20,6 +20,11 @@ public class QuestionController : MonoBehaviour
 
     void Start()
     {
+        FillQuestion();
+    }
+
+    void FillQuestion()
+    {
         question = GameManager.instance.GetQuestion();
         questionText.text = question.Message;
 

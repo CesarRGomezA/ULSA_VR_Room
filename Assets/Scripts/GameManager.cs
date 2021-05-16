@@ -7,19 +7,18 @@ using MLAPI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    Transform startPlayer1;
-    [SerializeField]
-    Transform middlePlayer1;
-    [SerializeField]
-    Transform lastPlayer1;
-    [SerializeField]
-    Transform winPlayer1;
-    [SerializeField]
-    Transform startPlayer2;
     public static GameManager instance;
     [SerializeField]
+    Transform[] player1Positions;
+    int player1CurrentPos = 0;
+    int player2CurrentPos = 0;
+    [SerializeField]
+    
+    Transform[] player2Positions;    
+    [SerializeField]
     List<Question> questions;
+    [SerializeField]
+    float moveSpeed;
 
     void Awake() 
     {
@@ -49,10 +48,38 @@ public class GameManager : MonoBehaviour
         Debug.Log("Back");
     }
 
-    public Vector3 startPointPlayer1 => startPlayer1.position;
-    public Vector3 middlePointPlayer1 => middlePlayer1.position;
-    public Vector3 lastPointPlayer1 => lastPlayer1.position;
-    public Vector3 winPointPlayer1 => winPlayer1.position;
+    public void GetPlayerPosition(VRCamera player)
+    {
+        if(player.player == 1)
+        {
+            player.transform.position = player1Positions[player1CurrentPos].position;
+        }
+        else
+        {
+            player.transform.position = player2Positions[player2CurrentPos].position;
+        }
+    }
 
-    public Vector3 startPointPlayer2 => startPlayer2.position;
+    public void MoveToNextStep(VRCamera player)
+    {
+        if(player.player == 1)
+        {
+            Debug.Log(1);
+            StartCoroutine(MoveToPoint(player, player1Positions[++player1CurrentPos].position, moveSpeed));
+        }
+        else
+        {
+            StartCoroutine(MoveToPoint(player, player2Positions[++player2CurrentPos].position, moveSpeed));
+        }
+    }
+
+    IEnumerator MoveToPoint(VRCamera player, Vector3 target, float speed)
+    {
+        while (Vector3.Distance(player.transform.position, target) > 0.1f)
+        {
+            float step = speed * Time.deltaTime;
+            player.transform.position = Vector3.MoveTowards(player.transform.position, target, step);
+            yield return null;
+        }
+    }
 }
