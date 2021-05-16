@@ -126,9 +126,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f07cea9d7135a764c972a8bd8401a45f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPlayer1: {x: 30, y: 0, z: -35}
-  startPlayer2: {x: 35, y: 0, z: -35}
-  hostPlayer: 0
-  initNetwork:
-    m_PersistentCalls:
-      m_Calls: []
+  startPlayer1: {fileID: 0}
+  middlePlayer1: {fileID: 0}
+  lastPlayer1: {fileID: 0}
+  winPlayer1: {fileID: 0}
+  startPlayer2: {fileID: 0}
+  questions:
+  - {fileID: 11400000, guid: 86eba92f69284b843a858885e42865ea, type: 2}
+  - {fileID: 11400000, guid: ea8203f7832cfe0459b464ff029b43dc, type: 2}
+  - {fileID: 11400000, guid: 9e41b33b75463ce4aaab45c361791e6b, type: 2}
+  - {fileID: 11400000, guid: 9481a120f2d5adf46b81710e168c1df5, type: 2}
+  - {fileID: 11400000, guid: ff253b2a1c9e96841a6a2401fb6c9b7b, type: 2}
+  - {fileID: 11400000, guid: 0cb85ba68041f8c4e82ae2d7c54265ad, type: 2}
+  - {fileID: 11400000, guid: c81ef7e66852721479dd1cd2d597c730, type: 2}
+  - {fileID: 11400000, guid: 48d2894ff5422284aba2d73a45d512a2, type: 2}
+  - {fileID: 11400000, guid: 87406e9390144dd4c8dab03ab7b61907, type: 2}
+  - {fileID: 11400000, guid: 3d57a5bcf63a2ae4f84ba43d119315db, type: 2}
+  - {fileID: 11400000, guid: a362d23db642faf4da9ba59be6214e9d, type: 2}
+  - {fileID: 11400000, guid: 14c324638a7021a42beaf6d37794f790, type: 2}
+  - {fileID: 11400000, guid: 694544d4ed9cd91428d8e9c7cb46475a, type: 2}
+  - {fileID: 11400000, guid: ca5646844f00f5840a61a1d58f92604c, type: 2}
+  - {fileID: 11400000, guid: 88facd7cce122a94894bc7c2b3f73e86, type: 2}
+  - {fileID: 11400000, guid: 28103a774b5dcdb4eb0ac524cd96762d, type: 2}
+  - {fileID: 11400000, guid: 032e7655d3cec014abbd2656eea11ac0, type: 2}
+  - {fileID: 11400000, guid: 3e540cfd359bfe541b45a30113899146, type: 2}
+  - {fileID: 11400000, guid: 2df812e6f0ad85b4ead8b640539dc1b0, type: 2}
+  - {fileID: 11400000, guid: 3c144aca443511f4aa8625f1b4c8748e, type: 2}
+  - {fileID: 11400000, guid: ee424757187ae1c4bbf7b3a1b11f8a00, type: 2}
+  - {fileID: 11400000, guid: 198d732cdc09d6c4eb87080b021ab6a9, type: 2}
+  - {fileID: 11400000, guid: d389c7125df4f26449f5735a3f1de239, type: 2}
+  - {fileID: 11400000, guid: 77e26731d1d6e504d9ba288b9c7d477b, type: 2}
+  - {fileID: 11400000, guid: d18b7c0277db6b647ab09e0df3b77b89, type: 2}
+  - {fileID: 11400000, guid: 277d2c3b1036c4b459ee7ce62c9250a7, type: 2}
+  - {fileID: 11400000, guid: 571cd57c91f74df458403f7336da463f, type: 2}
+  - {fileID: 11400000, guid: 3448e12b52bae2348be3c965eafa4145, type: 2}
+  - {fileID: 11400000, guid: 358515563e9c0d44e8df888700cd1965, type: 2}
+  - {fileID: 11400000, guid: ddf5e3d2da8d3ab49b90af0612a93ff2, type: 2}
+  - {fileID: 11400000, guid: a27c51da112ee494e9e45901271ec255, type: 2}
+  - {fileID: 11400000, guid: 92047e71d74da33488bde46dc975c33d, type: 2}
+  - {fileID: 11400000, guid: 83bf541560421394a9cbb140c85851d0, type: 2}
+  - {fileID: 11400000, guid: 3c9cbf70cf2309445b98675e69557e58, type: 2}
+  - {fileID: 11400000, guid: 2c27af82031b5b746a6fa17352c60abc, type: 2}
+  - {fileID: 11400000, guid: 9dcc9620ffb6af44c96ee30b2cfe734a, type: 2}
+  - {fileID: 11400000, guid: e264a4d715632db4da35a2444d7e16f4, type: 2}
+  - {fileID: 11400000, guid: f40d73149aea21f439239f585b2f0e53, type: 2}
+  - {fileID: 11400000, guid: dccb609e28c401049a159d5d55ff6a42, type: 2}
+  - {fileID: 11400000, guid: 475765bbadc594d459893157099bd03b, type: 2}
+  - {fileID: 11400000, guid: ecc0c06bb590d7b4da90540a216283a9, type: 2}
+  - {fileID: 11400000, guid: 4454e28c49e072546a25dbd3d26a4338, type: 2}
+  - {fileID: 11400000, guid: 32b69213842e7cb469e81d07cc66f832, type: 2}
+  - {fileID: 11400000, guid: 0a6597c5c0a973c41bd7389f14f2b325, type: 2}
+  - {fileID: 11400000, guid: a44e3e19611ce4242bcf3b059f5f2a7c, type: 2}
+  - {fileID: 11400000, guid: 37e390b8d4505a74ea77fb6e79d5f95f, type: 2}
+  - {fileID: 11400000, guid: 151cd99346edbe84aaf002497aeb64e2, type: 2}
+  - {fileID: 11400000, guid: 11f06434ad217134aa93da19b8fe3f89, type: 2}
+  - {fileID: 11400000, guid: 3962682c8a1fe0241b8980172e7f2a4f, type: 2}
+  - {fileID: 11400000, guid: 2330a4a948eefd74994b099514d71807, type: 2}
