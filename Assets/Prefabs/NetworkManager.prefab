@@ -54,6 +54,7 @@ MonoBehaviour:
     RegisteredScenes:
     - Game
     - Menu
+    - Map
     AllowRuntimeSceneChanges: 0
     NetworkPrefabs:
     - Prefab: {fileID: 5919615798040949962, guid: 1069949d839e6994f91e1cc6eb551057,
@@ -126,14 +127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f07cea9d7135a764c972a8bd8401a45f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPlayer1: {fileID: 0}
-  middlePlayer1: {fileID: 0}
-  lastPlayer1: {fileID: 0}
-  winPlayer1: {fileID: 0}
-  startPlayer2: {fileID: 0}
   questions:
   - {fileID: 11400000, guid: 86eba92f69284b843a858885e42865ea, type: 2}
-  - {fileID: 11400000, guid: ea8203f7832cfe0459b464ff029b43dc, type: 2}
+  - {fileID: 11400000, guid: 2330a4a948eefd74994b099514d71807, type: 2}
   - {fileID: 11400000, guid: 9e41b33b75463ce4aaab45c361791e6b, type: 2}
   - {fileID: 11400000, guid: 9481a120f2d5adf46b81710e168c1df5, type: 2}
   - {fileID: 11400000, guid: ff253b2a1c9e96841a6a2401fb6c9b7b, type: 2}
@@ -181,4 +177,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 151cd99346edbe84aaf002497aeb64e2, type: 2}
   - {fileID: 11400000, guid: 11f06434ad217134aa93da19b8fe3f89, type: 2}
   - {fileID: 11400000, guid: 3962682c8a1fe0241b8980172e7f2a4f, type: 2}
-  - {fileID: 11400000, guid: 2330a4a948eefd74994b099514d71807, type: 2}
+  players: []

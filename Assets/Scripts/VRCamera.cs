@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MLAPI;
+using MLAPI.NetworkVariable;
+using MLAPI.Messaging;
+using TMPro;
 
 public class VRCamera : NetworkBehaviour
 {
@@ -25,7 +28,8 @@ public class VRCamera : NetworkBehaviour
   TargetButton target;
   Camera m_camera;
 
-  public int player;
+  public Player player;
+  QuestionController question;
 
   void Awake()
   {
@@ -49,21 +53,33 @@ public class VRCamera : NetworkBehaviour
     {
       reticleTrs.localScale = initialScale;
       vrcontrols.Gameplay.VRClick.performed += _=> ClickOverObject();
+      if(IsServer)
+        player = transform.Find("/Player1").GetComponent<Player>();
+      else
+        player = transform.Find("/Player2").GetComponent<Player>();
+      player.VRPlayer = this;
+      GameManager.instance.VRPlayer = this;
+      player.StartPlayer();
     }
     else 
     {
       m_camera.enabled = false;
       GetComponent<AudioListener>().enabled = false;
     }
-
-    if(IsServer)
-      player = 1;
-    else
-      player = 2;
-    
-    GameManager.instance.GetPlayerPosition(this);
-    GameManager.instance.MoveToNextStep(this);
+    GameManager.instance.AddPlayer();
   }
+
+  /*[ServerRpc]
+  public void StartGameServerRpc()
+  {
+    StartGameClientRpc();
+  }
+
+  [ClientRpc]
+  void StartGameClientRpc()
+  {
+    player.MoveToNextStep();
+  }*/
 
   void ClickOverObject()
   {
@@ -76,6 +92,20 @@ public class VRCamera : NetworkBehaviour
     if(!IsLocalPlayer) return;
     transform.Translate(new Vector3(AxisDirection.x, 0f, AxisDirection.y) * Time.deltaTime * 3f);
     #endif
+    if(!GameManager.instance.gameStarted && GameManager.instance.playersCount.Value >= 2)
+    {
+      player.MoveToNextStep();
+      GameManager.instance.gameStarted = true;
+    }
+
+    if(GameManager.instance.playerWin.Value != 0)
+    {
+      Transform message = transform.Find("Message");
+      message.Find("Panel/Text").GetComponent<TMP_Text>().text = $"Player {GameManager.instance.playerWin.Value} Win";
+      message.gameObject.SetActive(true);
+
+      Time.timeScale = 0;
+    }
   }
 
   void FixedUpdate()
@@ -90,6 +120,7 @@ public class VRCamera : NetworkBehaviour
       if(hit.transform.CompareTag("Button")){
         isCounting = true;
         target = hit.collider.GetComponent<TargetButton>();
+        question = target.transform.parent.parent.GetComponent<QuestionController>();
         target.buttonImage.color = new Color(0.4f,0.4f,0.4f);
         loadingImage.fillAmount = 0;
       }else{
@@ -113,6 +144,7 @@ public class VRCamera : NetworkBehaviour
       loadingImage.fillAmount = 0;
     }
     if(countdown >= 3) { 
+      if(question) question.player = player;
       if(target) target.Action();
     }
     if(isCounting)
