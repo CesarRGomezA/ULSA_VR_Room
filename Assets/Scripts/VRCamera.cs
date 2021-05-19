@@ -30,11 +30,13 @@ public class VRCamera : NetworkBehaviour
 
   public Player player;
   QuestionController question;
-
+  public int id = 0;
+  public bool win = false;
   void Awake()
   {
     m_camera = GetComponent<Camera>();
     vrcontrols = new VRControls();
+    //playersCount = transform.Find("/PlayersCount").GetComponent<PlayersCount>();
   }
 
   void OnEnable()
@@ -53,33 +55,46 @@ public class VRCamera : NetworkBehaviour
     {
       reticleTrs.localScale = initialScale;
       vrcontrols.Gameplay.VRClick.performed += _=> ClickOverObject();
-      if(IsServer)
-        player = transform.Find("/Player1").GetComponent<Player>();
+      if(!IsServer)
+      {
+        if(IsOwner)
+        {
+          GetComponent<Rigidbody>().isKinematic = true;
+        } 
+      }
       else
-        player = transform.Find("/Player2").GetComponent<Player>();
-      player.VRPlayer = this;
-      GameManager.instance.VRPlayer = this;
-      player.StartPlayer();
+      {
+        GetComponent<Rigidbody>().isKinematic = true;
+      }
     }
     else 
     {
       m_camera.enabled = false;
       GetComponent<AudioListener>().enabled = false;
     }
-    GameManager.instance.AddPlayer();
+    GameManager.instance.AddPlayer(this);
   }
 
-  /*[ServerRpc]
-  public void StartGameServerRpc()
+  void AddPlayer()
   {
-    StartGameClientRpc();
+    GameManager.instance.playersCount++;
   }
 
-  [ClientRpc]
-  void StartGameClientRpc()
+  public void StartGame()
   {
+    if(IsServer) return;
+    if(!IsOwner) return;
+    if(id != 1)
+      player = transform.Find("/Player2").GetComponent<Player>();
+    else
+      player = transform.Find("/Player1").GetComponent<Player>();
+    player.VRPlayer = this;
+    GameManager.instance.VRPlayer = this;
+    player.StartPlayer();
     player.MoveToNextStep();
-  }*/
+    GetComponent<Rigidbody>().isKinematic = false;
+    Debug.Log("start game");
+  }
 
   void ClickOverObject()
   {
@@ -92,19 +107,40 @@ public class VRCamera : NetworkBehaviour
     if(!IsLocalPlayer) return;
     transform.Translate(new Vector3(AxisDirection.x, 0f, AxisDirection.y) * Time.deltaTime * 3f);
     #endif
-    if(!GameManager.instance.gameStarted && GameManager.instance.playersCount.Value >= 2)
-    {
-      player.MoveToNextStep();
-      GameManager.instance.gameStarted = true;
-    }
 
-    if(GameManager.instance.playerWin.Value != 0)
+    //if(!GameManager.instance.gameStarted && GameManager.instance.playersCount.Value >= 2)
+    /*if(!GameManager.instance.gameStarted && playersCount.count.Value >= 2)
     {
+      if(!IsServer) player.MoveToNextStep();
+      GameManager.instance.gameStarted = true;
+    }*/
+
+   
+  }
+
+  public IEnumerator Win(int id)
+  {
+    if(IsOwner)
+    {
+      yield return new WaitForSeconds(0.2f); 
       Transform message = transform.Find("Message");
-      message.Find("Panel/Text").GetComponent<TMP_Text>().text = $"Player {GameManager.instance.playerWin.Value} Win";
+      message.Find("Panel/Text").GetComponent<TMP_Text>().text = $"Player {id} Win";
       message.gameObject.SetActive(true);
 
       Time.timeScale = 0;
+    }
+    StartCoroutine(RestartGame());
+  }
+
+  IEnumerator RestartGame()
+  {
+    if(IsOwner)
+    {
+      yield return new WaitForSecondsRealtime(5f); 
+      Transform message = transform.Find("Message");
+      message.gameObject.SetActive(false);
+      Time.timeScale = 1;
+      if(!IsServer) player.StartPlayer();
     }
   }
 

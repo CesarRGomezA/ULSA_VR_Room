@@ -19,6 +19,7 @@ public class Player : NetworkBehaviour
     
     public void StartPlayer()
     {
+        CurrentPos = 0;
         VRPlayer.transform.position = Positions[CurrentPos].position;
     }
 

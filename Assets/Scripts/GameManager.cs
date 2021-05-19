@@ -15,8 +15,9 @@ public class GameManager : NetworkBehaviour
     List<Question> questions;
     [SerializeField]
     public VRCamera VRPlayer;
-    public NetworkVariableInt playersCount = new NetworkVariableInt(0);
-    public NetworkVariableInt playerWin = new NetworkVariableInt(0);
+
+    public int playersCount = 0;
+    public List<VRCamera> players = new List<VRCamera>();
     void Awake() 
     {
         if(instance)
@@ -36,23 +37,21 @@ public class GameManager : NetworkBehaviour
     }
 
     public bool gameStarted = false;
-    public void AddPlayer()
+    public void AddPlayer(VRCamera player)
     {
-        playersCount.Value += 1;
-        if(playersCount.Value >= 2)
+        player.id = players.Count;
+        players.Add(player);
+        if(players.Count >= 3)
         {
-            //VRPlayer.StartGameServerRpc();
+            foreach(VRCamera p in players)
+            {
+                p.StartGame();
+            }   
         }
     }
 
     void Update()
     {
         
-    }
-
-    public void Win(int playerId)
-    {
-        playerWin.Value = playerId;
-    }
-    
+    } 
 }

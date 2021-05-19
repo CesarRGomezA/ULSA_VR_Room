@@ -8,8 +8,12 @@ public class Win : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Finish");
             VRCamera player = other.GetComponent<VRCamera>();
-            GameManager.instance.Win(player.player.id);
+            foreach(VRCamera p in GameManager.instance.players)
+            {
+                StartCoroutine(p.Win(player.id));
+            } 
         }
     }
 }

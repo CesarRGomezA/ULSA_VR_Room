@@ -12,11 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 33b8a5e9250eee24aa05108a14e6d444
   - enabled: 0
-    path: Assets/Scenes/Game.unity
-    guid: 996bc409a5e754248b6776f13ab95c31
-  - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: Assets/Scenes/Game.unity
+    guid: 996bc409a5e754248b6776f13ab95c31
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 914aaa6abbd47054fb830cbfba662d47,
       type: 2}
