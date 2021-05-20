@@ -6,153 +6,147 @@ using TMPro;
 
 public class VRCamera : NetworkBehaviour
 {
-  [SerializeField, Range(0.1f, 100f)]
-  float rayDistance = 5f;
-  [SerializeField]
-  LayerMask rayLayerDetection;
-  RaycastHit hit;
-  [SerializeField]
-  Transform reticleTrs;
-  [SerializeField] 
-  UnityEngine.UI.Image loadingImage;
-  [SerializeField]
-  Vector3 initialScale;
-  bool isCounting = false;
-  float countdown = 0;
-  VRControls vrcontrols;
-  TargetButton target;
-  Camera m_camera;
+    [SerializeField, Range(0.1f, 100f)]
+    float rayDistance = 5f;
+    [SerializeField]
+    LayerMask rayLayerDetection;
+    RaycastHit hit;
+    [SerializeField]
+    Transform reticleTrs;
+    [SerializeField] 
+    UnityEngine.UI.Image loadingImage;
+    [SerializeField]
+    Vector3 initialScale;
+    bool isCounting = false;
+    float countdown = 0;
+    VRControls vrcontrols;
+    TargetButton target;
+    Camera m_camera;
 
-  public Player player;
-  QuestionController question;
-  public int id = 0;
-  public bool win = false;
-  void Awake()
-  {
-    m_camera = GetComponent<Camera>();
-    vrcontrols = new VRControls();
-  }
+    public Player player;
+    QuestionController question;
+    public int id = 0;
+    public bool win = false;
 
-  void Start()
-  {
-    if(IsLocalPlayer)
+    public Transform XRRig;
+
+    void Awake()
     {
-      reticleTrs.localScale = initialScale;
-      if(!IsServer)
-      {
+        m_camera = GetComponent<Camera>();
+        vrcontrols = new VRControls();
+        XRRig = transform.parent.parent;
+    }
+
+    void Start()
+    {
+        if(!IsLocalPlayer)
+        {
+            m_camera.enabled = false;
+            GetComponent<AudioListener>().enabled = false;
+        }
+        else
+        {
+            GetComponent<Rigidbody>().isKinematic = true;
+        }
+        GameManager.instance.AddPlayer(this);
+    }
+
+    public void StartGame()
+    {
+        if(IsServer) return;
+        if(!IsOwner) return;
+        if(id != 1)
+            player = transform.Find("/Player2").GetComponent<Player>();
+        else
+            player = transform.Find("/Player1").GetComponent<Player>();
+        player.VRPlayer = this;
+        GameManager.instance.VRPlayer = this;
+        player.StartPlayer();
+        player.MoveToNextStep();
+        GetComponent<Rigidbody>().isKinematic = false;
+        Debug.Log("start game");
+    }
+
+    public IEnumerator Win(int id)
+    {
         if(IsOwner)
         {
-          GetComponent<Rigidbody>().isKinematic = true;
-        } 
-      }
-      else
-      {
-        GetComponent<Rigidbody>().isKinematic = true;
-      }
-    }
-    else 
-    {
-      m_camera.enabled = false;
-      GetComponent<AudioListener>().enabled = false;
-    }
-    GameManager.instance.AddPlayer(this);
-  }
+            yield return new WaitForSeconds(0.2f); 
+            Transform message = transform.Find("Message");
+            message.Find("Panel/Text").GetComponent<TMP_Text>().text = $"Player {id} Win";
+            message.gameObject.SetActive(true);
 
-  public void StartGame()
-  {
-    if(IsServer) return;
-    if(!IsOwner) return;
-    if(id != 1)
-      player = transform.Find("/Player2").GetComponent<Player>();
-    else
-      player = transform.Find("/Player1").GetComponent<Player>();
-    player.VRPlayer = this;
-    GameManager.instance.VRPlayer = this;
-    player.StartPlayer();
-    player.MoveToNextStep();
-    GetComponent<Rigidbody>().isKinematic = false;
-    Debug.Log("start game");
-  }
-
-  public IEnumerator Win(int id)
-  {
-    if(IsOwner)
-    {
-      yield return new WaitForSeconds(0.2f); 
-      Transform message = transform.Find("Message");
-      message.Find("Panel/Text").GetComponent<TMP_Text>().text = $"Player {id} Win";
-      message.gameObject.SetActive(true);
-
-      Time.timeScale = 0;
+            Time.timeScale = 0;
+        }
+        StartCoroutine(RestartGame());
     }
-    StartCoroutine(RestartGame());
-  }
 
-  IEnumerator RestartGame()
-  {
-    if(IsOwner)
+    IEnumerator RestartGame()
     {
-      yield return new WaitForSecondsRealtime(5f); 
-      Transform message = transform.Find("Message");
-      message.gameObject.SetActive(false);
-      Time.timeScale = 1;
-      if(!IsServer) player.StartPlayer();
+        if(IsOwner)
+        {
+            yield return new WaitForSecondsRealtime(5f); 
+            Transform message = transform.Find("Message");
+            message.gameObject.SetActive(false);
+            Time.timeScale = 1;
+            if(!IsServer) player.StartPlayer();
+        }
     }
-  }
 
-  void FixedUpdate()
-  {
-    if(Physics.Raycast(transform.position, transform.forward, out hit, rayDistance, rayLayerDetection))
+    void FixedUpdate()
     {
-      reticleTrs.position = hit.point;
-      reticleTrs.localScale = initialScale * hit.distance;
-      reticleTrs.Find("Reticle").GetComponent<SpriteRenderer>().color = Color.white;
-      reticleTrs.Find("Reticle").GetComponent<Light>().range = 0.3f;
-      reticleTrs.rotation = Quaternion.LookRotation(hit.normal);
-      if(hit.transform.CompareTag("Button")){
-        isCounting = true;
-        target = hit.collider.GetComponent<TargetButton>();
-        question = target.transform.parent.parent.GetComponent<QuestionController>();
-        target.buttonImage.color = new Color(0.4f,0.4f,0.4f);
-        loadingImage.fillAmount = 0;
-      }else{
-        isCounting = false;
-        countdown = 0;
-        if(target) target.buttonImage.color = Color.white;
-        loadingImage.fillAmount = 0;
-      } 
-    }
-    else
-    {
-      reticleTrs.localScale = initialScale;
-      reticleTrs.localPosition = new Vector3(0, 0, 1);
-      reticleTrs.localRotation = Quaternion.identity;
-      reticleTrs.Find("Reticle").GetComponent<Light>().range = 0;
+        if(Physics.Raycast(transform.position, transform.forward, out hit, rayDistance, rayLayerDetection))
+        {
+            reticleTrs.position = hit.point;
+            reticleTrs.localScale = initialScale * hit.distance;
+            reticleTrs.Find("Reticle").GetComponent<SpriteRenderer>().color = Color.white;
+            reticleTrs.Find("Reticle").GetComponent<Light>().range = 0.3f;
+            reticleTrs.rotation = Quaternion.LookRotation(hit.normal);
+            if(hit.transform.CompareTag("Button")){
+                isCounting = true;
+                target = hit.collider.GetComponent<TargetButton>();
+                question = target.transform.parent.parent.GetComponent<QuestionController>();
+                target.buttonImage.color = new Color(0.4f,0.4f,0.4f);
+                loadingImage.fillAmount = 0;
+            }else{
+                isCounting = false;
+                countdown = 0;
+                if(target) target.buttonImage.color = Color.white;
+                loadingImage.fillAmount = 0;
+            } 
+        }
+        else
+        {
+            reticleTrs.localScale = initialScale;
+            reticleTrs.localPosition = new Vector3(0, 0, 1);
+            reticleTrs.localRotation = Quaternion.identity;
+            reticleTrs.Find("Reticle").GetComponent<Light>().range = 0;
 
-      isCounting = false;
-      countdown = 0;
-      if(target) target.buttonImage.color = Color.white;
-      reticleTrs.Find("Reticle").GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.7f, 0.7f);
-      loadingImage.fillAmount = 0;
+            isCounting = false;
+            countdown = 0;
+            if(target) target.buttonImage.color = Color.white;
+            reticleTrs.Find("Reticle").GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.7f, 0.7f);
+            loadingImage.fillAmount = 0;
+        }
+        if(countdown >= 3) { 
+            if(question) question.player = player;
+            if(target) target.Action();
+        }
+        if(isCounting)
+        {
+            countdown += Time.deltaTime;
+            loadingImage.fillAmount = countdown/3f;
+            if(target)
+            {
+                float color = countdown/3f > 0.4f ? countdown/3f : 0.4f;
+                target.buttonImage.color = new Color(color, color, color);
+            }
+        }
+
     }
-    if(countdown >= 3) { 
-      if(question) question.player = player;
-      if(target) target.Action();
-    }
-    if(isCounting)
+
+    public override void NetworkStart()
     {
-      countdown += Time.deltaTime;
-      loadingImage.fillAmount = countdown/3f;
-      if(target)
-      {
-        float color = countdown/3f > 0.4f ? countdown/3f : 0.4f;
-        target.buttonImage.color = new Color(color, color, color);
-      }
+        base.NetworkStart();
     } 
-  }
-
-  public override void NetworkStart()
-  {
-    base.NetworkStart();
-  } 
 }
