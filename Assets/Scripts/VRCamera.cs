@@ -2,14 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MLAPI;
-using MLAPI.NetworkVariable;
-using MLAPI.Messaging;
 using TMPro;
 
 public class VRCamera : NetworkBehaviour
 {
-  [SerializeField]
-  Color rayColor = Color.green;
   [SerializeField, Range(0.1f, 100f)]
   float rayDistance = 5f;
   [SerializeField]
@@ -21,7 +17,6 @@ public class VRCamera : NetworkBehaviour
   UnityEngine.UI.Image loadingImage;
   [SerializeField]
   Vector3 initialScale;
-  bool objectTouched;
   bool isCounting = false;
   float countdown = 0;
   VRControls vrcontrols;
@@ -36,17 +31,6 @@ public class VRCamera : NetworkBehaviour
   {
     m_camera = GetComponent<Camera>();
     vrcontrols = new VRControls();
-    //playersCount = transform.Find("/PlayersCount").GetComponent<PlayersCount>();
-  }
-
-  void OnEnable()
-  {
-    vrcontrols.Enable();
-  }
-
-  void OnDisable()
-  {
-    vrcontrols.Disable();
   }
 
   void Start()
@@ -54,7 +38,6 @@ public class VRCamera : NetworkBehaviour
     if(IsLocalPlayer)
     {
       reticleTrs.localScale = initialScale;
-      vrcontrols.Gameplay.VRClick.performed += _=> ClickOverObject();
       if(!IsServer)
       {
         if(IsOwner)
@@ -75,11 +58,6 @@ public class VRCamera : NetworkBehaviour
     GameManager.instance.AddPlayer(this);
   }
 
-  void AddPlayer()
-  {
-    GameManager.instance.playersCount++;
-  }
-
   public void StartGame()
   {
     if(IsServer) return;
@@ -94,28 +72,6 @@ public class VRCamera : NetworkBehaviour
     player.MoveToNextStep();
     GetComponent<Rigidbody>().isKinematic = false;
     Debug.Log("start game");
-  }
-
-  void ClickOverObject()
-  {
-
-  }
-
-  void Update() 
-  {
-    #if UNITY_STANDALONE_WIN
-    if(!IsLocalPlayer) return;
-    transform.Translate(new Vector3(AxisDirection.x, 0f, AxisDirection.y) * Time.deltaTime * 3f);
-    #endif
-
-    //if(!GameManager.instance.gameStarted && GameManager.instance.playersCount.Value >= 2)
-    /*if(!GameManager.instance.gameStarted && playersCount.count.Value >= 2)
-    {
-      if(!IsServer) player.MoveToNextStep();
-      GameManager.instance.gameStarted = true;
-    }*/
-
-   
   }
 
   public IEnumerator Win(int id)
@@ -195,16 +151,8 @@ public class VRCamera : NetworkBehaviour
     } 
   }
 
-  void OnDrawGizmosSelected()
-  {
-    Gizmos.color = rayColor;
-    Gizmos.DrawRay(transform.position, transform.forward * rayDistance);
-  }
-
   public override void NetworkStart()
   {
     base.NetworkStart();
   } 
-
-  Vector2 AxisDirection => vrcontrols.Gameplay.Movement.ReadValue<Vector2>();
 }

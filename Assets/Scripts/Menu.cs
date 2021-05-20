@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MLAPI;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {

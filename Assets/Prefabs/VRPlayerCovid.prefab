@@ -308,8 +308,8 @@ GameObject:
   - component: {fileID: 7051747361550017934}
   - component: {fileID: 1166114168255084484}
   - component: {fileID: 8661063908406253869}
-  - component: {fileID: 185786801142208386}
   - component: {fileID: 2613785257414426729}
+  - component: {fileID: -8034392335538654139}
   m_Layer: 0
   m_Name: VRPlayerCovid
   m_TagString: Player
@@ -397,7 +397,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7361c40372f11ed49ad1fdedcdab866f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayColor: {r: 0, g: 1, b: 0, a: 1}
   rayDistance: 45.3
   rayLayerDetection:
     serializedVersion: 2
@@ -406,6 +405,8 @@ MonoBehaviour:
   loadingImage: {fileID: 7527257208294737356}
   initialScale: {x: 0.4, y: 0.4, z: 0.4}
   player: {fileID: 0}
+  id: 0
+  win: 0
 --- !u!82 &7051747361550017934
 AudioSource:
   m_ObjectHideFlags: 0
@@ -567,7 +568,21 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!54 &185786801142208386
+--- !u!136 &2613785257414426729
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5919615798040949962}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.20454744
+  m_Height: 1.2227421
+  m_Direction: 1
+  m_Center: {x: 0.021931902, y: -0.11137092, z: -0.0050816983}
+--- !u!54 &-8034392335538654139
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -583,20 +598,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!136 &2613785257414426729
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5919615798040949962}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.20454744
-  m_Height: 1.2227421
-  m_Direction: 1
-  m_Center: {x: 0.021931902, y: -0.11137092, z: -0.0050816983}
 --- !u!1 &6106955778104944383
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,7 +640,6 @@ GameObject:
   - component: {fileID: 7819067089660588209}
   - component: {fileID: 9193536235478121405}
   - component: {fileID: 5936708382027931924}
-  - component: {fileID: 757049116004450774}
   - component: {fileID: 4410429744302877583}
   m_Layer: 5
   m_Name: Message
@@ -711,23 +711,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &757049116004450774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6398675752864751198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!65 &4410429744302877583
 BoxCollider:
   m_ObjectHideFlags: 0

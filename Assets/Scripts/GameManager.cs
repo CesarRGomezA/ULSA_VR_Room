@@ -1,12 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 using MLAPI;
-using MLAPI.NetworkVariable;
-using MLAPI.Messaging;
-using TMPro;
+
 
 public class GameManager : NetworkBehaviour
 {
@@ -36,7 +32,6 @@ public class GameManager : NetworkBehaviour
         return questions[Random.Range(0, questions.Count)];
     }
 
-    public bool gameStarted = false;
     public void AddPlayer(VRCamera player)
     {
         player.id = players.Count;
@@ -49,9 +44,4 @@ public class GameManager : NetworkBehaviour
             }   
         }
     }
-
-    void Update()
-    {
-        
-    } 
 }

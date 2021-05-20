@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class VRCameraLocal : MonoBehaviour
 {
-  [SerializeField]
-  Color rayColor = Color.green;
   [SerializeField, Range(0.1f, 100f)]
   float rayDistance = 5f;
   [SerializeField]
@@ -17,7 +15,6 @@ public class VRCameraLocal : MonoBehaviour
   UnityEngine.UI.Image loadingImage;
   [SerializeField]
   Vector3 initialScale;
-  bool objectTouched;
   bool isCounting = false;
   float countdown = 0;
   VRControls vrcontrols;  
@@ -26,16 +23,6 @@ public class VRCameraLocal : MonoBehaviour
   void Awake()
   {
     vrcontrols = new VRControls();
-  }
-
-  void OnEnable()
-  {
-    vrcontrols.Enable();
-  }
-
-  void OnDisable()
-  {
-    vrcontrols.Disable();
   }
 
   void Start()
@@ -97,6 +84,4 @@ public class VRCameraLocal : MonoBehaviour
         }
     } 
   }
-
-  Vector2 AxisDirection => vrcontrols.Gameplay.Movement.ReadValue<Vector2>();
 }
