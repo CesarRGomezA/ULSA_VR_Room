@@ -144,7 +144,7 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -18.720001
       objectReference: {fileID: 0}
-    - target: {fileID: 420546, guid: a45f923de9555884cbe160883ce87a74, type: 3}
+    - target: {fileID: 420446, guid: a45f923de9555884cbe160883ce87a74, type: 3}
       propertyPath: m_LocalPosition.z
       value: -52.860302
       objectReference: {fileID: 0}
@@ -179,11 +179,7 @@ PrefabInstance:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a45f923de9555884cbe160883ce87a74, type: 3}
 --- !u!4 &2360213 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 420546, guid: a45f923de9555884cbe160883ce87a74,
-    type: 3}
-  m_PrefabInstance: {fileID: 2360212}
-  m_PrefabAsset: {fileID: 0}
+
 --- !u!1001 &4292657
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -319,7 +315,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 105562, guid: 65da5bb2d6e288b41baa018d8fec58f3, type: 3}
       propertyPath: m_Name
-      value: Cactus2 (1)
+      value: Cactus2 (3)
       objectReference: {fileID: 0}
     - target: {fileID: 417424, guid: 65da5bb2d6e288b41baa018d8fec58f3, type: 3}
       propertyPath: m_RootOrder
@@ -382,7 +378,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1275690203221910, guid: 1365cba3e29ac804dbaa96bd89a1db02, type: 3}
       propertyPath: m_Name
-      value: Construction15 (3)
+      value: Construction15 (2)
       objectReference: {fileID: 0}
     - target: {fileID: 4050592348960942, guid: 1365cba3e29ac804dbaa96bd89a1db02, type: 3}
       propertyPath: m_RootOrder
@@ -434,7 +430,7 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4050592348960942, guid: 1365cba3e29ac804dbaa96bd89a1db02,
     type: 3}
-  m_PrefabInstance: {fileID: 10403070}
+  m_PrefabInstance: {fileID: 10402070}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &11417183
 PrefabInstance:
@@ -61941,7 +61937,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1989939404}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -61968,7 +61964,7 @@ MeshRenderer:
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
+  m_AutoUVMaxAngle: 45
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -67219,9 +67215,6 @@ Transform:
   - {fileID: 155259657}
   - {fileID: 573374670}
   - {fileID: 145447991}
-  - {fileID: 1675146852}
-  - {fileID: 1307968037}
-  - {fileID: 1061343598}
   - {fileID: 2061045268}
   - {fileID: 630556442}
   - {fileID: 1815042726}
