@@ -6,7 +6,7 @@ ______________________________________
 A través del siguiente READ ME, presentamos la documentación realizada por este equipo conformado por alumnos de décimo semestre de la carrera de ingeniería 
 en producción multimedia, licenciatura que se encuentra entre las carreras que registra la Universidad La Salle Noroeste para la creación de una aplicación 
 móvil, utilizando la tecnología VR y el motor de juegos Unity Engine en su versión 2019.4.20f1 (versión más estable actualmente). La creación de esta aplicación 
-fue hecha a través del lenguaje de programación C++, debido a que es el lenguaje con el cual los programadores del equipo están más familiarizados debido 
+fue hecha a través del lenguaje de programación C#, debido a que es el lenguaje con el cual los programadores del equipo están más familiarizados debido 
 al tiempo que tienen trabajando con él. Implementando la incorporación de MLAPI (Unity Multiplayer Networking) para que varios usuarios puedan “convivir” 
 al mismo tiempo en un espacio virtual.
 
