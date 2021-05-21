@@ -6,8 +6,8 @@ using MLAPI;
 public class Player : NetworkBehaviour
 {
     [SerializeField]
-    Transform[] Positions;
-    int CurrentPos = 0;
+    public Transform[] Positions;
+    public int CurrentPos = 0;
     public VRCamera VRPlayer;
     [SerializeField]
     GameObject[] questions;
@@ -15,7 +15,7 @@ public class Player : NetworkBehaviour
     float moveSpeed = 3;
     [SerializeField]
     GameObject bridges;
-    
+
     public void StartPlayer()
     {
         CurrentPos = 0;
@@ -23,10 +23,26 @@ public class Player : NetworkBehaviour
         VRPlayer.XRRig.position = Positions[CurrentPos].position;
     }
 
+    Coroutine coroutine;
     public void MoveToNextStep()
     {
-        StopCoroutine("MoveToPoint");
-        StartCoroutine(MoveToPoint(VRPlayer, Positions[++CurrentPos].position, moveSpeed, CurrentPos == Positions.Length - 1));
+        if(coroutine != null) StopCoroutine(coroutine);
+        coroutine = StartCoroutine(MoveToPoint(VRPlayer, Positions[++CurrentPos].position, moveSpeed, CurrentPos == Positions.Length - 1));
+    }
+
+    public void RestartMoveToNextStep()
+    {
+        if(CurrentPos == 0)
+        {
+            foreach (GameObject question in questions)
+            {
+                question.SetActive(false);
+                question.GetComponent<QuestionController>().FillQuestion();
+            }
+            if (coroutine != null) StopCoroutine(coroutine);
+            CurrentPos = 1;
+            coroutine = StartCoroutine(MoveToPoint(VRPlayer, Positions[CurrentPos].position, moveSpeed, CurrentPos == Positions.Length - 1));
+        }
     }
 
     public void MoveBack()

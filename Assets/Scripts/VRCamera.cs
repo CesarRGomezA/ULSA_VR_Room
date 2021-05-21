@@ -64,7 +64,6 @@ public class VRCamera : NetworkBehaviour
         GameManager.instance.VRPlayer = this;
         player.StartPlayer();
         player.MoveToNextStep();
-        //GetComponent<Rigidbody>().isKinematic = false;
         Debug.Log("start game");
     }
 
@@ -78,12 +77,13 @@ public class VRCamera : NetworkBehaviour
             message.gameObject.SetActive(true);
 
             Time.timeScale = 0;
+            StartCoroutine(RestartGame());
         }
-        StartCoroutine(RestartGame());
     }
 
     IEnumerator RestartGame()
     {
+        StopCoroutine("Win");
         if (IsOwner)
         {
             yield return new WaitForSecondsRealtime(5f);
@@ -91,18 +91,22 @@ public class VRCamera : NetworkBehaviour
             message.gameObject.SetActive(false);
             if (!IsServer)
             {
-                player.StartPlayer();
-                player.MoveToNextStep();
+                //player.StartPlayer();
+                player.CurrentPos = 0;
+                transform.localPosition = new Vector3(0f, -0.17f, 0f);
+                XRRig.position = player.Positions[player.CurrentPos].position;
+                player.RestartMoveToNextStep();
             }
+            win = false;
             Time.timeScale = 1;
         }
     }
 
     private void Update()
     {
-        if (XRRig.position.x <= GameManager.instance.lastPosition.position.x + 1)
+        if (!win && XRRig.position.x <= GameManager.instance.lastPosition.position.x + 1)
         {
-            Debug.Log("win");
+            win = true;
             foreach (VRCamera p in GameManager.instance.players)
             {
                 StartCoroutine(p.Win(id));
