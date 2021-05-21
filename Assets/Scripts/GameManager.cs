@@ -11,6 +11,10 @@ public class GameManager : NetworkBehaviour
     List<Question> questions;
     [SerializeField]
     public VRCamera VRPlayer;
+    [SerializeField]
+    public Transform floorPosition;
+    [SerializeField]
+    public Transform lastPosition;
 
     public int playersCount = 0;
     public List<VRCamera> players = new List<VRCamera>();

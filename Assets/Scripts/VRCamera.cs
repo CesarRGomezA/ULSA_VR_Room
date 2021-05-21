@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MLAPI;
+using MLAPI.NetworkVariable;
 using TMPro;
 
 public class VRCamera : NetworkBehaviour
@@ -13,7 +14,7 @@ public class VRCamera : NetworkBehaviour
     RaycastHit hit;
     [SerializeField]
     Transform reticleTrs;
-    [SerializeField] 
+    [SerializeField]
     UnityEngine.UI.Image loadingImage;
     [SerializeField]
     Vector3 initialScale;
@@ -46,7 +47,7 @@ public class VRCamera : NetworkBehaviour
         }
         else
         {
-            GetComponent<Rigidbody>().isKinematic = true;
+            //GetComponent<Rigidbody>().isKinematic = true;
         }
         GameManager.instance.AddPlayer(this);
     }
@@ -63,7 +64,7 @@ public class VRCamera : NetworkBehaviour
         GameManager.instance.VRPlayer = this;
         player.StartPlayer();
         player.MoveToNextStep();
-        GetComponent<Rigidbody>().isKinematic = false;
+        //GetComponent<Rigidbody>().isKinematic = false;
         Debug.Log("start game");
     }
 
@@ -83,13 +84,29 @@ public class VRCamera : NetworkBehaviour
 
     IEnumerator RestartGame()
     {
-        if(IsOwner)
+        if (IsOwner)
         {
-            yield return new WaitForSecondsRealtime(5f); 
+            yield return new WaitForSecondsRealtime(5f);
             Transform message = transform.Find("Message");
             message.gameObject.SetActive(false);
             Time.timeScale = 1;
-            if(!IsServer) player.StartPlayer();
+            if (!IsServer)
+            {
+                player.StartPlayer();
+                player.MoveToNextStep();
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (XRRig.position.x <= GameManager.instance.lastPosition.position.x + 1)
+        {
+            Debug.Log("win");
+            foreach (VRCamera p in GameManager.instance.players)
+            {
+                StartCoroutine(p.Win(id));
+            }
         }
     }
 
