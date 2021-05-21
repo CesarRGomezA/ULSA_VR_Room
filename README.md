@@ -212,24 +212,27 @@ la mayoría como lo son el menú de información, botones, backgrounds, tipograf
 otros elementos gráficos que pueden ser observados se utilizó el programa de adobe 
 illustrator, dando como resultado los siguientes diseños:
 
-###AGREGAR IMAGEN
+![alt text](https://github.com/CesarRGomezA/ULSA_VR_Room/blob/main/Images/6.jpg?raw=true)
+![alt text](https://github.com/CesarRGomezA/ULSA_VR_Room/blob/main/Images/7.png?raw=true)
 
 El juego VR TRIVIA ROOM: PERSIANO EN EL DESIERTO tiene como propósito conectar a dos 
 jugadores a través de la red hacia un ambiente VR en apoyo a la tecnología MLAPI.
 
-###AGREGAR IMAGEN
+![alt text](https://github.com/CesarRGomezA/ULSA_VR_Room/blob/main/Images/3.jpg?raw=true)
+![alt text](https://github.com/CesarRGomezA/ULSA_VR_Room/blob/main/Images/4.jpg?raw=true)
+![alt text](https://github.com/CesarRGomezA/ULSA_VR_Room/blob/main/Images/5.jpg?raw=true)
 
 Se crearon ScriptablesObject para el almacenamiento de las preguntas que el usuario tendrá 
 que contestar de manera positiva para seguir avanzando a través del escenario creado.
 
-###AGREGAR IMAGEN
+![alt text](https://github.com/CesarRGomezA/ULSA_VR_Room/blob/main/Images/1.jpg?raw=true)
 
-Por el lado de la programación se utilizó el programa Visual Studio Code, creando los 
+Por el lado de la programación se utilizó el programa Visual Studio, creando los 
 scripts bajo el lenguaje C#, en donde se encuentran descritos y programados los movimientos que el 
 usuario podrá realizar, así como también se encuentra la adaptación y compatibilidad 
 con dispositivos Android.
 
-###AGREGAR IMAGEN
+![alt text](https://github.com/CesarRGomezA/ULSA_VR_Room/blob/main/Images/2.png?raw=true)
 
 ______________________________________  
 
@@ -285,18 +288,15 @@ ______________________________________
 *CONCLUSIONES*
 
 Después de horas de trabajo, concluimos que es uno de los trabajos que más investigación 
-hemos realizados para su creación, ya que muncha información relacionada a MLAPI no está 
-disponible, más bien no se encuentra mucha, ya que no se ha explotado del en su totalidad 
-y la encontrada se encontraba en inglés, lo cual no era problema, el problema llegaba cuando
-sitios árabes eran vinculados a MLAPI. Que por precaución o desconocimiento del idioma no 
-tomábamos en cuenta por no saber si estábamos entrando a un tutorial de explosivos. 
+hemos realizados para su creación, ya que no hay mucha información disponble, debido a que no se ha explotado en su totalidad 
+y la información que se encuentra en internet era en inglés o algún otro idioma desconcido por el equipo. 
 
 Uno de los principales problemas fue el VR, ya que su configuración de funcionamiento 
 era el “gran problema” al que nos enfrentamos, fueron horas invertidas en su funcionamiento, 
 ya que, de una u otra manera, no funcionaba.
 
 Pero luego de concluir el proyecto, podemos decir que estamos conformes 
-con el resultado de VR TRIVIA ROOM: PERSIANO EN EL DESIERTO, , dando con
+con el resultado de VR TRIVIA ROOM: PERSIANO EN EL DESIERTO, dando con
 esto también fin a la saga de juegos creados en donde “Persiano” fue el 
 personaje principal de cada proyecto escolar.
 
@@ -419,8 +419,6 @@ ______________________________________
 •	Cesar Roberto Gómez
 
 •	Francisco Alonso Valenzuela
-
-• 
 
 •	Javier Eliud Lizárraga
 
