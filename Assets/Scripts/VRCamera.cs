@@ -70,9 +70,9 @@ public class VRCamera : NetworkBehaviour
 
     public IEnumerator Win(int id)
     {
-        if(IsOwner)
+        yield return new WaitForSeconds(0.2f);
+        if (IsOwner)
         {
-            yield return new WaitForSeconds(0.2f); 
             Transform message = transform.Find("Message");
             message.Find("Panel/Text").GetComponent<TMP_Text>().text = $"Player {id} Win";
             message.gameObject.SetActive(true);
@@ -89,12 +89,12 @@ public class VRCamera : NetworkBehaviour
             yield return new WaitForSecondsRealtime(5f);
             Transform message = transform.Find("Message");
             message.gameObject.SetActive(false);
-            Time.timeScale = 1;
             if (!IsServer)
             {
                 player.StartPlayer();
                 player.MoveToNextStep();
             }
+            Time.timeScale = 1;
         }
     }
 
