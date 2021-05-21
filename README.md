@@ -15,7 +15,9 @@ ______________________________________
 *DATOS GENERALES DEL PROYECTO*
 
 Unity versión: 2019.4.20f1.
-Peso:
+
+Peso: 48.6 mb
+
 Repositorio de almacenamiento: https://github.com/CesarRGomezA/ULSA_VR_Room 
 
 ______________________________________
